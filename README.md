@@ -20,4 +20,21 @@ func (t *Test) BeforeCreate(tx *gorm.DB) error {
 }
 ```
 
+
+### Usage
+
+##### Where statement:
+```go
+model := Test{}
+db.Find(&model, "id = ?", ParseUUID("ed67a4b2-8f77-4d18-8c58-0508e7b207e8"))
+log.Printf("data: %+v\n", model)
+```
+
+##### Create statement: 
+Will autogenerate uuid automatically because of `BeforeCreate` hook added
+```go
+data := Test{Name: fmt.Sprintf("Time is: %s", time.Now())}
+db.Create(&data)
+```
+
 **Check [this article](https://dipesh-kc.medium.com/implementation-of-uuid-and-binary-16-in-gorm-v2-1c329c352c91?sk=04dd6a121675ed4f2a635eabc3c3592b) for more information**
